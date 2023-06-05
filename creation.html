@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/creation.js"></script>
+</head>
+
+<body>
+    <div>
+        <div id="creation">
+            <form id="form" action="" method="POST">
+                <h1>Ajouter un accident</h1>
+                <div class="d">
+                    <label for="age_cond" class="l">Age du conducteur*</label><br>
+                    <input type="number" class="i" name="age_cond" required="required">
+                </div>
+                <div class="d">
+                    <label for="date" class="l">Date*</label><br>
+                    <input type="datetime-local" class="i" id="my-date-input" name="date" required="required">
+                </div>
+
+                <div class="d">
+                    <label for="ville" class="l">Ville*</label><br>
+                    <input type="text" class="i" name="ville" required="required">
+                </div>
+
+                <div class="d">
+                    <label for="lat" class="l">Latitude*</label><br>
+                    <input type="number" class="i" name="lat" step="any" required="required">
+                </div>
+
+                <div class="d">
+                    <label for="lon" class="l">Longitude*</label><br>
+                    <input type="number" class="i" name="lon" step="any" required="required">
+                </div>
+
+                <div class="d">
+                    <label for="cond_ath" class="l">Conditions athmosphériques*</label><br>
+                    <select name="cond_ath">
+                        <option value="1">Brouillard – fumée</option>
+                        <option value="2">Neige – grêle</option>
+                        <option value="3">Pluie forte</option>
+                        <option value="4">Normale</option>
+                        <option value="5">Autre</option>
+                        <option value="6">Temps éblouissant</option>
+                        <option value="7">Pluie légère</option>
+                        <option value="8">Temps couvert</option>
+                        <option value="9">Vent fort – tempête</option>
+                      </select>
+                </div>
+
+                <div class="d">
+                    <label for="cond_lum" class="l">Luminosité*</label><br>
+                    <select name="cond_lum">
+                        <option value="1">Plein jour</option>
+                        <option value="2">Crépuscule ou aube</option>
+                        <option value="3">Nuit sans éclairage public</option>
+                        <option value="4">Nuit avec éclairage public non allumé</option>
+                        <option value="5">Nuit avec éclairage public allumé</option>
+                      </select>                </div>
+                <div class="d">
+                    <label for="etat_surf" class="l">Etat surface*</label><br>
+                    <select name="etat_surf">
+                        <option value="1">Verglacée</option>
+                        <option value="2">Mouillée</option>
+                        <option value="3">Normale</option>
+                        <option value="4">Autre</option>
+                        <option value="5">Enneigée</option>
+                        <option value="6">Flaques</option>
+                        <option value="7">Corps gras – huile</option>
+                        <option value="8">Boue</option>
+                        <option value="9">Inondée</option>
+                      </select>                </div>
+
+                <div class="d">
+                    <label for="dispo_secu" class="l">Sécurité*</label><br>
+                    <select name="dispo_secu">
+                        <option value="1">Autre - Non déterminable</option>
+                        <option value="2">Autre - Non utilisé</option>
+                        <option value="3">Autre - Utilisé</option>
+                        <option value="4">Présence d'un casque - Utilisation non déterminable</option>
+                        <option value="5">Présence d'un casque non utilisé</option>
+                        <option value="6">Présence d'un dispositif enfant non utilisé</option>
+                        <option value="7">Présence d'un équipement réfléchissant non utilisé</option>
+                        <option value="8">Présence d'une ceinture de sécurité - Utilisation non déterminable</option>
+                        <option value="9">Présence de ceinture de sécurité non utilisée</option>
+                        <option value="10">Présence dispositif enfant - Utilisation non déterminable</option>
+                        <option value="11">Présence équipement réfléchissant - Utilisation non déterminable</option>
+                        <option value="12">Utilisation d'un casque</option>
+                        <option value="13">Utilisation d'un dispositif enfant</option>
+                        <option value="14">Utilisation d'un équipement réfléchissant</option>
+                        <option value="15">Utilisation d'une ceinture de sécurité</option>
+                      </select>                </div>
+
+                <div class="text-center" id="dcreation">
+                    <input type="submit" id="submit" name="submit" value="Créer">
+                </div>
+            </form>
+        </div>
+        <script src=""></script>
+</body>
+
+</html>

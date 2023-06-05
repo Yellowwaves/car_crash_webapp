@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Carte des accidents</title>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="liste_accident">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Age du conducteur</th>
+                <th>Date/Heure</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Conditions atmosphériques</th>
+                <th>Luminosité de la scène</th>
+                <th>État de la route</th>
+                <th>État de la ceinture de sécurité</th>
+                <th>Ville</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Les données des accidents seront ajoutées ici via AJAX -->
+        </tbody>
+    </table>
+    <div id="map"></div>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiamVvZnVuIiwiYSI6ImNrd3huZXZjMzAwMWkycXFtb29zeDMxdnMifQ.N0SyKbZ6Br7bCL0IPmUZIg';
+
+        $(document).ready(function () {
+            $.ajax({
+                url: 'php/liste.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var tbody = $('#liste_accident tbody');
+                    console.log("valide");
+                    console.log(data);
+                    $.each(data, function (index, item) {
+                        var row = '<tr>' +
+                            '<td>' + item.id + '</td>' +
+                            '<td>' + item.age_conducteur + '</td>' +
+                            '<td>' + item.date_heure + '</td>' +
+                            '<td>' + item.latitude + '</td>' +
+                            '<td>' + item.longitude + '</td>' +
+                            '<td>' + item.conditions_atmospheriques + '</td>' +
+                            '<td>' + item.luminosite_scene + '</td>' +
+                            '<td>' + item.etat_route + '</td>' +
+                            '<td>' + item.etat_ceinture_secu + '</td>' +
+                            '<td>' + item.ville + '</td>' +
+                            '</tr>';
+                        tbody.append(row);
+                    });
+
+                    initializeMap(data);
+                },
+                error: function (xhr, resp, text, data) {
+                    console.log("fail");
+                    console.log(xhr, resp, text);
+                    console.log(data);
+                }
+            });
+        });
+
+        function initializeMap(data) {
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v12',
+                center: [0, 0],
+                zoom: 1.25
+            });
+
+            map.addControl(new mapboxgl.NavigationControl());
+
+            map.on('load', function () {
+                map.addSource('accidents', {
+                    type: 'geojson',
+                    data: {
+                        type: 'FeatureCollection',
+                        features: data.map(function (accident) {
+                            return {
+                                type: 'Feature',
+                                properties: accident,
+                                geometry: {
+                                    type: 'Point',
+                                    coordinates: [parseFloat(accident.longitude), parseFloat(accident.latitude)]
+                                }
+                            };
+                        })
+                    }
+                });
+
+                map.addLayer({
+                    id: 'accidents',
+                    type: 'circle',
+                    source: 'accidents',
+                    paint: {
+                        'circle-color': 'red',
+                        'circle-radius': 5,
+                        'circle-stroke-width': 1,
+                        'circle-stroke-color': 'white'
+                    }
+                });
+
+                map.on('click', 'accidents', function (e) {
+                    var accident = e.features[0].properties;
+                    var popupContent = '<h3>Accident ID: ' + accident.id + '</h3>' +
+                        '<p>Date/Heure: ' + accident.date_heure + '</p>' +
+                        '<p>Age du conducteur: ' + accident.age_conducteur + '</p>' +
+                        '<p>Conditions atmosphériques: ' + accident.conditions_atmospheriques + '</p>' +
+                        '<p>Luminosité de la scène: ' + accident.luminosite_scene + '</p>' +
+                        '<p>État de la route: ' + accident.etat_route + '</p>' +
+                        '<p>État de la ceinture de sécurité: ' + accident.etat_ceinture_secu + '</p>' +
+                        '<p>Ville: ' + accident.ville + '</p>';
+
+                    var popup = new mapboxgl.Popup()
+                        .setLngLat(e.lngLat)
+                        .setHTML(popupContent)
+                        .addTo(map);
+                });
+
+                map.on('mouseenter', 'accidents', function () {
+                    map.getCanvas().style.cursor = 'pointer';
+                });
+
+                map.on('mouseleave', 'accidents', function () {
+                    map.getCanvas().style.cursor = '';
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
