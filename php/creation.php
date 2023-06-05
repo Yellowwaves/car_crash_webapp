@@ -1,6 +1,6 @@
 <?php
     $age_cond = $_POST['age_cond'];
-    $date = ($_POST['date']);
+    $date = $_POST['date'];
     $ville = $_POST['ville'];
     $lat = $_POST['lat'];
     $lon = $_POST['lon'];
@@ -8,20 +8,14 @@
     $cond_lum = $_POST['cond_lum'];
     $etat_surf = $_POST['etat_surf'];
     $dispo_secu = $_POST['dispo_secu'];
+    $id_cat_veh = $_POST['id_cat_veh'];
+    $id_type_col = $_POST['id_type_col'];
+
     //print des variables pour vérifier
-    echo $age_cond;
-    echo $date;
-    echo $ville;
-    echo $lat;
-    echo $lon;
-    echo $cond_ath;
-    echo $cond_lum;
-    echo $etat_surf;
-    echo $dispo_secu;
 
     include("database.php");
-    $nouvel_accident = $pdo->prepare("insert into tests (age_conducteur,date_heure,ville,latitude,longitude,conditions_atmospheriques,luminosite_scene,etat_route,etat_ceinture_secu) values (?,?,?,?,?,?,?,?,?)");
-    $nouvel_accident->execute(array($age_cond,$date,$ville,$lat,$lon,$cond_ath,$cond_lum,$etat_surf,$dispo_secu));
-    $resp['redirect'] = "index.html";
+    $nouvel_accident = $pdo->prepare("INSERT INTO accident (acc_id, date, latitude, longitude, age, id_athmo, id_lum, id_etat_surf, id_dispo_secu,id_grav, id_cat_veh, id_code_insee, id_type_col) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?,NULL, ?, ?, ?)");
+    $nouvel_accident->execute(array($date, $lat, $lon, $age_cond, $cond_ath, $cond_lum, $etat_surf, $dispo_secu, $id_cat_veh, $ville, $id_type_col));
+    $resp['redirect'] = "liste.html";
     echo json_encode($resp);
 ?>

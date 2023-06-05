@@ -7,10 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HTML 5 Boilerplate</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/creation.js"></script>
 </head>
 
 <body>
+    <div id="output"></div>
     <div>
         <div id="creation">
             <form id="form" action="" method="POST">
@@ -97,6 +99,47 @@
                         <option value="15">Utilisation d'une ceinture de sécurité</option>
                       </select>                </div>
 
+                <div class="d">
+
+                    <select name="id_cat_veh">
+                        <option value="1">Autobus</option>
+                        <option value="2">Autocar</option>
+                        <option value="3">Autre véhicule</option>
+                        <option value="4">Bicyclette</option>
+                        <option value="5">Cyclomoteur &lt;50cm3</option>
+                        <option value="6">Engin spécial</option>
+                        <option value="7">Motocyclette > 125 cm3</option>
+                        <option value="8">Motocyclette > 50 cm3 et &lt;= 125 cm3</option>
+                        <option value="9">PL > 3,5T + remorque</option>
+                        <option value="10">PL seul > 7,5T</option>
+                        <option value="11">PL seul 3,5T &lt;PTCA &lt;= 7,5T</option>
+                        <option value="12">Quad léger &lt;= 50 cm3 (Quadricycle à moteur non carrossé)</option>
+                        <option value="13">Quad lourd > 50 cm3 (Quadricycle à moteur non carrossé)</option>
+                        <option value="14">Scooter &lt; 50 cm3</option>
+                        <option value="15">Scooter > 125 cm3</option>
+                        <option value="16">Scooter > 50 cm3 et &lt;= 125 cm3</option>
+                        <option value="17">Tracteur agricole</option>
+                        <option value="18">Tracteur routier + semi-remorque</option>
+                        <option value="19">Tracteur routier seul</option>
+                        <option value="20">Train</option>
+                        <option value="21">Tramway</option>
+                        <option value="22">VL seul</option>
+                        <option value="23">Voiturette (Quadricycle à moteur carrossé)</option>
+                        <option value="24">VU seul 1,5T &lt;= PTAC &lt;= 3,5T avec ou sans remorque</option>
+                      </select>
+                </div>
+
+                <div class="d">
+                    <select name="id_type_col">
+                        <option value="1">Autre collision</option>
+                        <option value="2">Deux véhicules - Frontale</option>
+                        <option value="3">Deux véhicules – Par l’arrière</option>
+                        <option value="4">Deux véhicules – Par le coté</option>
+                        <option value="5">Sans collision</option>
+                        <option value="6">Trois véhicules et plus – Collisions multiples</option>
+                        <option value="7">Trois véhicules et plus – En chaîne</option>
+                    </select>
+                </div>
                 <div class="text-center" id="dcreation">
                     <input type="submit" id="submit" name="submit" value="Créer">
                 </div>
