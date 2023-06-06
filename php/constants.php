@@ -5,7 +5,7 @@
 //Annee:
 $mysqlServerIp     = "localhost";
 $mysqlServerPort   = "3306";
-$mysqlDbName     = "etu124";
+$mysqlDbName     = "projeta3";
 $mysqlDbUser     = "etu124";
 $mysqlDbPwd     = "siaoobjv";
 $mysqlDbCharset   = "UTF8";
