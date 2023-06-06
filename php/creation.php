@@ -15,7 +15,7 @@
     $id_type_col = $_POST['id_type_col'];
 
     include("database.php");
-    $nouvel_accident = $pdo->prepare("INSERT INTO accident (acc_id, date, latitude, longitude, age, id_athmo, id_lum, id_etat_surf, id_dispo_secu,id_grav, id_cat_veh, id_code_insee, id_type_col) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?,NULL, ?, ?, ?)");
+    $nouvel_accident = $pdo->prepare("INSERT INTO accident_new (acc_id, date, latitude, longitude, age, id_athmo, id_lum, id_etat_surf, id_dispo_secu,id_grav, id_cat_veh, id_code_insee, id_type_col) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?,NULL, ?, ?, ?)");
     $nouvel_accident->execute(array($formattedDate, $lat, $lon, $age_cond, $cond_ath, $cond_lum, $etat_surf, $dispo_secu, $id_cat_veh, $ville, $id_type_col));
     $resp['redirect'] = "liste.html";
     echo json_encode($resp);

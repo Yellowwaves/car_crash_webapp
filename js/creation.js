@@ -1,7 +1,8 @@
 $(document).ready(function () {
     $.get('php/dynamic_select.php', function (data) {
-        $.each(data, function (idx, opt) {
-            $('#ville').append('<option value="' + opt.id_code_insee + '">' + opt.ville_nom + '</option>');
+        var villeData = JSON.parse(data.ville); // Conversion de la chaîne JSON en un tableau d'objets
+        $.each(villeData, function (idx, opt) {
+          $('#ville').append('<option value="' + opt.id_code_insee + '">' + opt.ville_nom + '</option>');
         });
     }, 'json');
 

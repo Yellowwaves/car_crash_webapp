@@ -9,7 +9,7 @@ JOIN lum ON accident.id_lum = lum.id_lum
 JOIN ceinture ON accident.id_dispo_secu = ceinture.id_dispo_secu
 JOIN collision ON accident.id_type_col = collision.id_type_col
 JOIN vehicule ON accident.id_cat_veh = vehicule.id_cat_veh
-limit 10
+limit 100
 ");
 
 $accident->execute();
