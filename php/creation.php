@@ -1,6 +1,9 @@
 <?php
     $age_cond = $_POST['age_cond'];
     $date = $_POST['date'];
+    $date = isset($_POST['date']) ? $_POST['date'] : null;
+    $formattedDate = null;
+    $formattedDate = date('Y-m-d H:i:s', strtotime($date));
     $ville = $_POST['ville'];
     $lat = $_POST['lat'];
     $lon = $_POST['lon'];
@@ -11,11 +14,9 @@
     $id_cat_veh = $_POST['id_cat_veh'];
     $id_type_col = $_POST['id_type_col'];
 
-    //print des variables pour vérifier
-
     include("database.php");
     $nouvel_accident = $pdo->prepare("INSERT INTO accident (acc_id, date, latitude, longitude, age, id_athmo, id_lum, id_etat_surf, id_dispo_secu,id_grav, id_cat_veh, id_code_insee, id_type_col) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?,NULL, ?, ?, ?)");
-    $nouvel_accident->execute(array($date, $lat, $lon, $age_cond, $cond_ath, $cond_lum, $etat_surf, $dispo_secu, $id_cat_veh, $ville, $id_type_col));
+    $nouvel_accident->execute(array($formattedDate, $lat, $lon, $age_cond, $cond_ath, $cond_lum, $etat_surf, $dispo_secu, $id_cat_veh, $ville, $id_type_col));
     $resp['redirect'] = "liste.html";
     echo json_encode($resp);
 ?>
