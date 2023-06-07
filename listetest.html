@@ -5,24 +5,18 @@
     <title>Visualisation</title>
 </header>
 <head>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/listetest.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <style>
-        #map {
-            width: 100%;
-            height: 600px;
-        }
-    </style>
+    <meta charset="utf-8">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="index.html">Accueil</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -43,7 +37,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container">
         <div class="row">
             <!-- Barre de navigation à gauche -->
@@ -60,7 +53,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="age">Tranche d'âge</label>
+                                <label for="age" class="form-label">Tranche d'âge</label>
                                 <select id="age" name="age" class="form-select">
                                     <option value="">Toutes les tranches</option>
                                     <option value="0-20">0-20 ans</option>
@@ -70,7 +63,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="gravite">Gravité</label>
+                                <label for="gravite" class="form-label">Gravité</label>
                                 <select id="gravite" name="gravite" class="form-select">
                                     <option value="">Toutes les gravités</option>
                                     <option value="1">Gravité 1</option>
@@ -79,47 +72,47 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="ville">Ville</label>
+                                <label for="ville" class="form-label">Ville</label>
                                 <select id="ville" name="ville" class="form-select">
                                     <option value="">Toutes les villes</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="date">Date</label>
+                                <label for="date" class="form-label">Date</label>
                                 <input type="date" id="date" name="date" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="athmo">Conditions atmosphériques</label>
+                                <label for="athmo" class="form-label">Conditions atmosphériques</label>
                                 <select id="athmo" name="athmo" class="form-select">
                                     <option value="">Toutes les conditions atmosphériques</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="luminosite">Luminosité de la scène</label>
+                                <label for="luminosite" class="form-label">Luminosité de la scène</label>
                                 <select id="luminosite" name="luminosite" class="form-select">
                                     <option value="">Toutes les luminosités</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="etat_surf">État de la surface</label>
+                                <label for="etat_surf" class="form-label">État de la surface</label>
                                 <select id="etat_surf" name="etat_surf" class="form-select">
                                     <option value="">Tous les états de surface</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="securite">État de la ceinture de sécurité</label>
+                                <label for="securite" class="form-label">État de la ceinture de sécurité</label>
                                 <select id="securite" name="securite" class="form-select">
                                     <option value="">Tous les états de sécurité</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="cat_veh">Catégorie de véhicule</label>
+                                <label for="cat_veh" class="form-label">Catégorie de véhicule</label>
                                 <select id="cat_veh" name="cat_veh" class="form-select">
                                     <option value="">Toutes les catégories de véhicules</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="collision">Type de collision</label>
+                                <label for="collision" class="form-label">Type de collision</label>
                                 <select id="collision" name="collision" class="form-select">
                                     <option value="">Tous les types de collision</option>
                                 </select>
@@ -135,30 +128,47 @@
                     </div>
                 </section>
             </div>
-            <!-- Carte -->
+            
+            <!-- Contenu principal -->
             <div class="col-md-9">
                 <h1>Accidents</h1>
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Ma carte</h5>
-                    </div>
-                    <div id="map" style="margin-bottom: 20px;"></div>
+                <a class="btn btn-primary" href="cluster.html">Cluster</a>
+                <button type="button" id="predict" class="btn btn-primary"">Prédiction gravité</button>
+                <section id="products">
+                    <table id="liste_accident">
+                        <thead>
+                            <tr>
+                                <th>Id_Accident</th>
+                                <th>Date</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                                <th>Age</th>
+                                <th>Athmosphère</th>
+                                <th>Luminosité</th>
+                                <th>Etat surface</th>
+                                <th>Sécurité</th>
+                                <th>Gravité</th>
+                                <th>Catégorie Vehicule</th>
+                                <th>Code Insee</th>
+                                <th>Type collision</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center bg-dark text-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="mb-0">Elouan Teissere et Lucas Le Bihan</p>
+                    <p class="mb-0">Projet A3-Web</p>
                 </div>
             </div>
         </div>
-
-        <footer class="text-center bg-dark text-light py-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <p class="mb-0">Elouan Teissere et Lucas Le Bihan</p>
-                        <p class="mb-0">Projet A3-Web</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
-        <script src="js/carte.js"></script>
+    </footer>
 </body>
-
 </html>

@@ -82,6 +82,7 @@ $(document).ready(function() {
                         '<td>' + item.descr_cat_veh + '</td>' +
                         '<td>' + item.ville_nom + '</td>' +
                         '<td>' + item.descr_type_col + '</td>' +
+                        '<td><input type="radio" name="radio_predict" value="' + item.acc_id + '"></td>' +
                         '</tr>';
                     tbody.append(row);
                 });
@@ -107,12 +108,31 @@ $(document).ready(function() {
         });
 
     }
+    
     $('#filterBtn').click(function() {
         filtrerAccidents();
     });
     $('#cluster').click(function() {
         predireAccident();
     });
+    $('#envoyerBtn').click(function() {
+        // Récupérer la valeur sélectionnée
+        var selectedPred = $('input[name="radio_predict"]:checked').val();
+
+        // Envoyer la valeur sélectionnée à votre autre script via AJAX
+        $.ajax({
+          url: 'php/prediction.php',
+          method: 'POST',
+          data: { id_acc: selectedPred },
+          success: function(response) {
+            // Traitement de la réponse du script
+          },
+          error: function(xhr, status, error) {
+            // Gestion des erreurs AJAX
+          }
+        });
+      });
     filtrerAccidents();
+    
 });
 

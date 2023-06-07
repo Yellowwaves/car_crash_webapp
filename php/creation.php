@@ -1,4 +1,5 @@
 <?php
+
     $age_cond = $_POST['age_cond'];
     $date = $_POST['date'];
     $date = isset($_POST['date']) ? $_POST['date'] : null;

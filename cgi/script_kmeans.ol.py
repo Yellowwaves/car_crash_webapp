@@ -1,5 +1,6 @@
 #!/usr/bin/python3.9
 
+
 import pandas as pd
 import numpy as np
 import warnings
@@ -38,47 +39,41 @@ def clustering_lat_lon(donnees):
 
     return donnees, centroides
 
-def predire_clusters(accidents):
-    """Prédiction des clusters pour les accidents donnés"""
-    # Chargement des données et clustering initial
-    donnees = nettoyage()
-    donnees, centroides = clustering_lat_lon(donnees)
-
-    # Prédiction des clusters pour chaque accident
-    resultats = []
-    for accident in accidents:
-        latitude_accident = accident['latitude']
-        longitude_accident = accident['longitude']
-
-        # Recherche du cluster correspondant à l'accident donné
-        kmeans = KMeans(n_clusters=len(centroides), random_state=0).fit(centroides)
-        cluster_label = kmeans.predict([[latitude_accident, longitude_accident]])
-
-        # Construction du résultat pour l'accident donné
-        resultat = {
-            'latitude': latitude_accident,
-            'longitude': longitude_accident,
-            'cluster': int(cluster_label[0])
-        }
-        resultats.append(resultat)
-
-    return resultats
-
 # Activation du débogage CGI
 cgitb.enable()
 
 # Lecture des paramètres de la requête CGI
 form = cgi.FieldStorage()
-accidents= form["accidents"].value
-print(accidents)
-# Récupération des accidents sélectionnés depuis la requête POST
-accidents_data = json.loads(accidents)
-# print(accidents_data)
-# Appel de la fonction de prédiction des clusters
-resultats = predire_clusters(accidents_data)
+
+# Récupération de la latitude et de la longitude de l'accident
+latitude_accident = form.getvalue('latitude')
+longitude_accident = form.getvalue('longitude')
+
+# Appel de la fonction nettoyage
+donnees = nettoyage()
+
+# Appel de la fonction clustering_lat_lon
+donnees, centroides = clustering_lat_lon(donnees)
+
+# Recherche du cluster correspondant à l'accident donné
+# Utilisation des centroides dans la méthode k-means
+kmeans = KMeans(n_clusters=len(centroides), random_state=0).fit(centroides)
+cluster_label = kmeans.predict([[latitude_accident, longitude_accident]])
+
+# Construction du résultat
+resultat = int(cluster_label[0])
+
+# Conversion du résultat en JSON
+resultat_json = dic = {'cluster': resultat, 'latitude': latitude_accident,'longitude' : longitude_accident}
 
 # Envoi des en-têtes HTTP
-print("Content-type: application/json\r\n")
+print ("Content-type: application/json \r\n")
 
+#print("Content-Type: application/json")
+#print()
+jsonf=json.dumps(resultat_json)
+print(jsonf)
 # Envoi de la réponse JSON
-print(json.dumps(resultats))
+#print("latitude",latitude_accident)
+#print("longitude",longitude_accident)
+
